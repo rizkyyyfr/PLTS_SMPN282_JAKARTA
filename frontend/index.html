@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Dashboard monitoring pembangkit listrik tenaga surya" />
+  <title>Monitoring PLTS SMPN 282 Jakarta</title>
+  <link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#dashboard" aria-label="Surya Monitor beranda">
+        <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+        <span>PLTS 282</span>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigasi utama">
+        <a class="nav-item active" href="#dashboard"><span class="nav-icon">⊞</span> Dashboard</a>
+        <a class="nav-item" href="#produksi"><span class="nav-icon">⌁</span> Produksi Energi</a>
+        <a class="nav-item" href="#laporan"><span class="nav-icon">▤</span> Laporan</a>
+      </nav>
+
+      <div class="plant-card">
+        <span class="mini-label">LOKASI AKTIF</span>
+        <strong>PLTS SMPN 282</strong>
+        <span>Jakarta Utara, DKI Jakarta</span>
+      </div>
+      <p class="sidebar-footer">© 2026 PLTS 282</p>
+    </aside>
+
+    <main id="dashboard" class="main-content">
+      <header class="topbar">
+        <button class="menu-button" aria-label="Buka menu">☰</button>
+        <div>
+          <p id="dashboardDate" class="eyebrow"></p>
+          <h1>Monitoring PLTS <span>SMPN 282 Jakarta</span></h1>
+        </div>
+        <div class="topbar-actions">
+          <button id="logoutButton" class="logout-button" type="button">Keluar</button>
+        </div>
+      </header>
+
+      <section class="top-feature-grid">
+      <section class="hero-status" aria-label="Status pembangkit saat ini">
+        <div class="status-copy">
+          <div class="live-badge"><span></span> REAL-TIME</div>
+          <h2>Energi bersih untuk masa depan.</h2>
+          <p id="heroComparison">Memuat perbandingan produksi…</p>
+          <div class="updated"><span>↻</span> Terakhir diperbarui <time id="lastUpdated">—</time></div>
+        </div>
+        <div class="sun-illustration" aria-hidden="true">
+          <div class="sun-rays"></div><div class="sun"></div>
+          <div class="solar-panel"><span></span><span></span><span></span><span></span><span></span><span></span></div>
+        </div>
+      </section>
+
+      <section id="lokasi" class="panel map-panel" aria-labelledby="map-title">
+        <div class="panel-header"><div><h3 id="map-title">Lokasi PLTS</h3><p>SMP Negeri 282 Jakarta Utara</p></div><span class="map-label">Peta lokasi</span></div>
+        <div class="map-frame"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5149.832775411035!2d106.86805477605759!3d-6.134398760144438!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f57e7887eaad%3A0x748ba9c22ac2953c!2sSMP%20Negeri%20282%20Jakarta%20UTARA!5e1!3m2!1sid!2sid!4v1787837836765!5m2!1sid!2sid" title="Peta lokasi SMP Negeri 282 Jakarta Utara" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+      </section>
+      </section>
+
+      <section class="metrics-grid" aria-label="Metrik utama">
+        <article class="metric-card highlight">
+          <div class="metric-heading"><span id="energyMetricLabel">Produksi hari ini</span><span class="metric-icon yellow">ϟ</span></div>
+          <div class="metric-value"><strong id="energyValue">—</strong> <span>kWh</span></div>
+          <div class="tiny-bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
+        </article>
+        <article class="metric-card power-metric-card">
+          <div class="metric-heading"><span>Daya saat ini</span><span class="metric-icon blue">⌁</span></div>
+          <div class="metric-value"><strong id="powerValue">—</strong> <span>kW</span></div>
+          <div class="power-details">
+            <div><span>Tegangan</span><strong id="voltageValue">—</strong></div>
+            <div><span>Arus</span><strong id="currentValue">—</strong></div>
+          </div>
+          <div class="progress"><span id="powerProgress" style="width:0%"></span></div>
+        </article>
+        <article class="metric-card temperature-metric-card">
+          <div class="metric-heading"><span>Sensor suhu panel</span><span class="metric-icon yellow">♨</span></div>
+          <div class="metric-value"><strong id="temperatureValue">—</strong> <span>°C</span></div>
+          <p><span id="temperatureStatus" class="sensor-status">● —</span> · Batas aman &lt; 65°C</p>
+        </article>
+        <article class="metric-card revenue-card">
+          <div class="metric-heading"><span id="revenueMetricLabel">Revenue hari ini</span><span class="metric-icon green">Rp</span></div>
+          <div class="metric-value currency"><span>Rp</span> <strong id="dailyRevenue">—</strong></div>
+          <p class="neutral">Dari <span id="dailyEnergy">—</span> kWh yang dihasilkan</p>
+          <div class="revenue-line"><span>Tarif P-1/TR aktif</span><strong id="tariffLabel">Rp1.699,53/kWh</strong></div>
+          <p class="tariff-note">Dikelola berdasarkan tanggal berlaku</p>
+        </article>
+        <article class="metric-card revenue-card">
+          <div class="metric-heading"><span>Proyeksi revenue</span><span class="metric-icon purple">↗</span></div>
+          <div class="revenue-period"><span>Total revenue</span><strong id="totalRevenueAllTime">-</strong></div>
+          <p id="projectionNote" class="neutral">Akumulasi dari seluruh data sensor yang tersimpan</p>
+        </article>
+      </section>
+
+      <section id="produksi" class="content-grid">
+        <article class="panel chart-panel">
+          <div class="panel-header"><div><h3>Produksi energi</h3><p id="chartSubtitle">Output energi per jam hari ini</p><p id="chartAxesDescription" class="chart-axes-description">Sumbu Y: total energi per jam (kWh) · Sumbu X: jam (24 jam)</p></div><div class="chart-tabs"><button class="active" data-period="daily">Harian</button><button data-period="weekly">Mingguan</button><button data-period="monthly">Bulanan</button></div></div>
+          <div class="chart-summary"><strong id="chartTotal">— kWh</strong><span id="chartComparison" class="positive"></span></div>
+          <div class="chart-wrap">
+            <div id="chartYAxis" class="y-axis"><span>100</span><span>75</span><span>50</span><span>25</span><span>0</span></div>
+            <svg id="energyChart" viewBox="0 0 760 196" preserveAspectRatio="none" role="img" aria-label="Grafik produksi energi">
+              <defs><linearGradient id="areaFill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#f2b72f" stop-opacity=".34"/><stop offset="100%" stop-color="#f2b72f" stop-opacity="0"/></linearGradient></defs>
+              <g class="grid-lines"><line x1="0" y1="10" x2="760" y2="10"/><line x1="0" y1="54" x2="760" y2="54"/><line x1="0" y1="98" x2="760" y2="98"/><line x1="0" y1="142" x2="760" y2="142"/><line x1="0" y1="186" x2="760" y2="186"/></g>
+              <path id="areaPath" fill="url(#areaFill)" d=""/>
+              <path id="linePath" class="chart-line" d=""/>
+              <circle id="chartDot" cx="0" cy="186" r="5" visibility="hidden"/>
+            </svg>
+            <div id="chartXAxis" class="x-axis"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>23:00</span></div>
+          </div>
+        </article>
+
+      </section>
+
+      <section id="laporan" class="bottom-grid">
+        <article class="panel alert-panel"><span id="alertIcon" class="alert-icon">✓</span><div><h3 id="alertTitle">Memeriksa sensor…</h3><p id="alertDescription">Status pembacaan sensor sedang diperiksa.</p></div></article>
+      </section>
+
+      <section class="panel history-panel" aria-labelledby="history-title">
+        <div class="panel-header history-header"><div><h3 id="history-title">Riwayat sensor</h3><p id="historyDescription">Pembacaan sensor pada tanggal yang dipilih</p></div><div class="history-actions"><label class="date-picker">Dari <input id="historyDate" type="date" /></label><label class="date-picker">Sampai <input id="historyEndDate" type="date" /></label><button id="exportHistory" class="export-button" type="button">⇩ Unduh Excel</button></div></div>
+        <div class="history-scroll"><table><thead><tr><th>Tanggal</th><th>Waktu</th><th>Suhu panel</th><th>Daya</th><th>Energi interval</th><th>Tegangan</th><th>Arus</th><th>Revenue</th></tr></thead><tbody id="historyRows"></tbody></table></div>
+        <div class="history-summary">
+          <article><span>Total energi</span><strong id="summaryEnergy">—</strong><small>kWh</small></article>
+          <article><span>Total revenue</span><strong id="summaryRevenue">—</strong><small>Akumulasi rentang</small></article>
+          <article><span>Rata-rata daya</span><strong id="summaryPower">—</strong><small>kW</small></article>
+          <article><span>Rata-rata suhu panel</span><strong id="summaryTemperature">—</strong><small>°C</small></article>
+          <article><span>Jumlah pembacaan</span><strong id="summaryReadings">—</strong><small>baris sensor</small></article>
+        </div>
+      </section>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
