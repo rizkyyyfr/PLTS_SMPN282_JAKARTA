@@ -16,12 +16,14 @@
     <h1>Selamat datang</h1>
     <p>Silakan masuk untuk melanjutkan ke Monitoring PLTS SMPN 282 Jakarta.</p>
     <form id="loginForm" class="login-form">
-      <label>Username<input id="username" name="username" autocomplete="username" required autofocus /></label>
+      <label>Email<input id="username" name="username" type="email" autocomplete="email" required autofocus /></label>
       <label>Kata sandi<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
       <p id="loginError" class="login-error" role="alert"></p>
       <button class="login-submit" type="submit">Masuk</button>
     </form>
   </main>
+   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="supabase-client.js"></script>
   <script src="login.js"></script>
 </body>
 </html>
