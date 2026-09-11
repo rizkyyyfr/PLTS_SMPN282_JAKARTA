@@ -313,7 +313,7 @@ function updateDashboard(readings, totals, payload = dashboardPayload) {
   setText('#powerValue', numberOrDash(latest.powerKw));
   $('#powerProgress').style.width = `${Math.min(100, Math.max(0, Number(latest.powerKw) || 0))}%`;
   setText('#energyValue', decimal.format(energy)); setText('#chartTotal', `${decimal.format(energy)} kWh`);
-  const dailyRevenue = energy * totals.tariff.rate;
+  const dailyRevenue = totals.totalRevenue;
   setText('#dailyRevenue', rupiah.format(dailyRevenue)); setText('#dailyEnergy', decimal.format(energy)); setText('#tariffLabel', formatTariff(totals.tariff.rate));
   setText('#totalRevenueAllTime', Number.isFinite(Number(totals.databaseTotalRevenue)) ? `Rp${rupiah.format(totals.databaseTotalRevenue)}` : '—');
   setText('#projectionNote', Number.isFinite(Number(totals.databaseReadingCount)) ? `Akumulasi ${totals.databaseTotalEnergyKwh} kWh dari ${totals.databaseReadingCount} pembacaan sensor` : 'Akumulasi dari seluruh data sensor yang tersimpan');
@@ -337,8 +337,6 @@ async function loadReadings() {
   try {
     const start = $('#historyDate').value;
     const end = $('#historyEndDate').value || start;
-    const today = localDateKey();
-
     const rangeReadings = (await Promise.all(datesInRange(start, end).map(async (itemDate) => ({
       date: itemDate, readings: await readingsFor(itemDate), tariff: await tariffFor(itemDate),
     })))).map((day) => ({ ...day, summary: summary(day.readings, day.tariff) }));
@@ -358,13 +356,15 @@ async function loadReadings() {
     };
     renderHistory(latestPayload.readings, latestPayload.summary);
 
-    const todayReadings = await readingsFor(today);
-    const previousDate = shiftDate(today, -1);
+    // Dashboard mengikuti tanggal/rentang yang sedang dipilih pada laporan.
+    // Untuk rentang multi-hari, readings sudah berisi seluruh data dalam
+    // rentang tersebut dan pembacaan terakhir dipakai untuk kartu daya/suhu.
+    const previousDate = shiftDate(start, -1);
     const previousReadings = await readingsFor(previousDate);
-    const todayTariff = await tariffFor(today);
+    const selectedTariff = await tariffFor(end);
     dashboardPayload = {
-      date: today, readings: todayReadings,
-      summary: { ...summary(todayReadings, todayTariff), previousDayEnergyKwh: summary(previousReadings, await tariffFor(previousDate)).totalEnergyKwh, databaseTotalEnergyKwh: database.energyKwh, databaseTotalRevenue: database.revenue, databaseReadingCount: database.readings },
+      date: start, range: { start, end }, readings,
+      summary: { ...latestPayload.summary, tariff: selectedTariff, previousDayEnergyKwh: summary(previousReadings, await tariffFor(previousDate)).totalEnergyKwh, databaseTotalEnergyKwh: database.energyKwh, databaseTotalRevenue: database.revenue, databaseReadingCount: database.readings },
     };
     updateDashboard(dashboardPayload.readings, dashboardPayload.summary, dashboardPayload);
     await loadChart();
