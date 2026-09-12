@@ -213,6 +213,23 @@ async function chartFor(period, date) {
   return { period, label: period === 'weekly' ? 'Produksi energi 7 hari terakhir' : 'Produksi energi bulan ini', points };
 }
 
+function chartForRange(start, end, readings) {
+  const energyByDate = new Map();
+  for (const reading of readings) {
+    const date = reading.timestamp.slice(0, 10);
+    energyByDate.set(date, (energyByDate.get(date) || 0) + (Number(reading.energyKwh) || 0));
+  }
+  const points = datesInRange(start, end).map((date) => ({
+    label: date,
+    value: Number((energyByDate.get(date) || 0).toFixed(3)),
+  }));
+  return {
+    period: 'range',
+    label: `Produksi energi per tanggal · ${start} – ${end}`,
+    points,
+  };
+}
+
 // =====================================================================
 // Rendering (SAMA seperti sebelumnya — tidak diubah)
 // =====================================================================
@@ -254,6 +271,16 @@ function renderEnergyChart(chart) {
 
 async function loadChart() {
   const date = dashboardPayload?.date || localDateKey();
+  const range = dashboardPayload?.range;
+  const isDateRange = range && range.start !== range.end;
+  const chartTabs = $('.chart-tabs');
+
+  if (chartTabs) chartTabs.style.display = isDateRange ? 'none' : '';
+  if (isDateRange) {
+    renderEnergyChart(chartForRange(range.start, range.end, dashboardPayload.readings));
+    return;
+  }
+
   if (chartPeriod === 'daily' && dashboardPayload?.date === date) {
     renderEnergyChart({
       period: 'daily',
