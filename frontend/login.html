@@ -12,22 +12,34 @@
 </head>
 <body class="login-page">
   <main class="login-card">
-    <div class="login-logos" aria-label="Politeknik Negeri Jakarta dan Sudin Pemerintah">
-      <img src="/assets/logo-pnj.png" alt="Logo PNJ" />
-      <img src="/assets/logo-sudin.png" alt="Logo Sudin Pemerintah" />
-    </div>
-    <a class="brand login-brand" href="/login.html" aria-label="Monitoring PLTS SMPN 282 Jakarta"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span>MONITORING PLTS<br>SM>
-    <h1>Selamat datang</h1>
-    <p>Silakan masuk untuk melanjutkan ke Monitoring PLTS SMPN 282 Jakarta.</p>
-    <form id="loginForm" class="login-form">
-      <label>Email<input id="username" name="username" type="email" autocomplete="email" required autofocus /></label>
-      <label>Kata sandi<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
-      <p id="loginError" class="login-error" role="alert"></p>
-      <button class="login-submit" type="submit">Masuk</button>
-    </form>
+    <section class="login-identity" aria-label="Identitas aplikasi">
+      <a class="login-lockup" href="/login.html" aria-label="Monitoring PLTS SMPN 282 Jakarta">
+        <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+        <span><strong>Monitoring PLTS</strong><small>SMPN 282 Jakarta</small></span>
+      </a>
+      <p class="login-tagline">Pantau produksi energi surya sekolah secara real-time.</p>
+      <div class="login-supported" aria-label="Didukung oleh Politeknik Negeri Jakarta dan Sudin Pemerintah">
+        <span>Didukung oleh</span>
+        <div class="login-logos">
+          <img src="/assets/logo-pnj.png" alt="Logo Politeknik Negeri Jakarta" />
+          <span class="login-logo-divider"></span>
+          <img src="/assets/logo-sudin.png" alt="Logo Sudin Pemerintah" />
+        </div>
+      </div>
+    </section>
+    <section class="login-form-panel">
+      <h1>Selamat datang</h1>
+      <p>Masuk dengan akun yang terdaftar untuk melihat dasbor.</p>
+      <form id="loginForm" class="login-form">
+        <label>Email<input id="username" name="username" type="email" autocomplete="email" required autofocus /></label>
+        <label>Kata sandi<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
+        <p id="loginError" class="login-error" role="alert"></p>
+        <button class="login-submit" type="submit">Masuk</button>
+      </form>
+    </section>
   </main>
    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="supabase-client.js"></script>
   <script src="login.js"></script>
 </body>
-</html
+</html>
