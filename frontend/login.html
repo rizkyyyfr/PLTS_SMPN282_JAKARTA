@@ -28,15 +28,71 @@
       </div>
     </section>
     <section class="login-form-panel">
-      <h1>Selamat datang</h1>
-      <p>Masuk dengan akun yang terdaftar untuk melihat dasbor.</p>
-      <form id="loginForm" class="login-form">
-        <label>Email<input id="username" name="username" type="email" autocomplete="email" required autofocus /></label>
-        <label>Kata sandi<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
-        <p id="loginError" class="login-error" role="alert"></p>
-        <button class="login-submit" type="submit">Masuk</button>
-      </form>
-    </section>
+  <div class="login-form-header">
+    <span class="login-eyebrow">PORTAL MONITORING</span>
+    <h1>Selamat datang</h1>
+    <p>Masuk untuk mengakses dashboard monitoring PLTS SMPN 282 Jakarta.</p>
+  </div>
+
+  <form id="loginForm" class="login-form">
+
+    <label class="input-group">
+      <span>Email</span>
+      <div class="input-wrapper">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M4 5h16a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/>
+          <path d="m4 7 8 6 8-6"/>
+        </svg>
+        <input
+          id="username"
+          name="username"
+          type="email"
+          autocomplete="email"
+          placeholder="nama@email.com"
+          required
+          autofocus
+        />
+      </div>
+    </label>
+
+    <label class="input-group">
+      <span>Kata sandi</span>
+      <div class="input-wrapper">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <rect x="4" y="10" width="16" height="10" rx="2"/>
+          <path d="M8 10V7a4 4 0 0 1 8 0v3"/>
+        </svg>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          autocomplete="current-password"
+          placeholder="Masukkan kata sandi"
+          required
+        />
+      </div>
+    </label>
+
+    <p id="loginError" class="login-error" role="alert"></p>
+
+    <button class="login-submit" type="submit">
+      <span>Masuk ke Dashboard</span>
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M5 12h14"/>
+        <path d="m13 6 6 6-6 6"/>
+      </svg>
+    </button>
+
+  </form>
+
+  <div class="login-security">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M12 3 20 6v5c0 5-3.4 8.7-8 10-4.6-1.3-8-5-8-10V6l8-3Z"/>
+      <path d="m9 12 2 2 4-4"/>
+    </svg>
+    <span>Akses aman untuk pengguna terdaftar</span>
+  </div>
+</section>
 
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
