@@ -12,21 +12,33 @@
 </head>
 <body class="login-page">
   <main class="login-card">
-    <div class="login-logos" aria-label="Politeknik Negeri Jakarta dan Sudin Pemerintah">
-      <img src="/assets/logo-pnj.png" alt="Logo PNJ" />
-      <img src="/assets/logo-sudin.png" alt="Logo Sudin Pemerintah" />
-    </div>
-    <a class="brand login-brand" href="/login.html" aria-label="Monitoring PLTS SMPN 282 Jakarta"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span>MONITORING PLTS<br>SMPN 282 JAKARTA</span></a>
+
+    <a class="brand login-brand" href="/login.html" aria-label="Monitoring PLTS SMPN 282 Jakarta">
+      <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+      <span>MONITORING PLTS<br>SMPN 282 Jakarta</span>
+    </a>
+
     <h1>Selamat datang</h1>
     <p>Silakan masuk untuk melanjutkan ke Monitoring PLTS SMPN 282 Jakarta.</p>
+
     <form id="loginForm" class="login-form">
       <label>Email<input id="username" name="username" type="email" autocomplete="email" required autofocus /></label>
       <label>Kata sandi<input id="password" name="password" type="password" autocomplete="current-password" required /></label>
       <p id="loginError" class="login-error" role="alert"></p>
       <button class="login-submit" type="submit">Masuk</button>
     </form>
+
+    <div class="login-footer" aria-label="Didukung oleh Politeknik Negeri Jakarta dan Sudin Pemerintah">
+      <span class="login-footer-label">Didukung oleh</span>
+      <div class="login-footer-marks">
+        <img src="/assets/logo-pnj.png" alt="Logo Politeknik Negeri Jakarta" />
+        <span class="login-footer-divider"></span>
+        <img src="/assets/logo-sudin.png" alt="Logo Sudin Pemerintah" />
+      </div>
+    </div>
+
   </main>
-   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
   <script src="supabase-client.js"></script>
   <script src="login.js"></script>
 </body>
