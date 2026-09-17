@@ -48,3 +48,38 @@ body { margin:0; min-width:320px; color:var(--ink); background:#f4f8f6; font-fam
 .power-details{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:15px;padding-top:12px;border-top:1px solid #dcebe1}.power-details div{display:grid;gap:4px}.power-details span{font-size:10px;color:#71867e}.power-details strong{font:700 13px 'DM Mono';color:#277858}.temperature-metric-card .metric-value{margin-bottom:7px}.temperature-metric-card p{color:#71867e}.bottom-grid{grid-template-columns:1fr}.bottom-grid .alert-panel{min-height:86px}
 .metric-heading{font-size:15px}.metric-card p{font-size:13px}.metric-value span{font-size:13px}.power-details span{font-size:12px}.power-details strong{font-size:15px}.revenue-period span{font-size:13px}.revenue-period strong{font-size:14px}.revenue-line{font-size:12px}.revenue-line strong{font-size:12px}.tariff-note{font-size:11px!important}
 .logout-button{padding:10px 16px;font-size:12px}
+
+/* Login page: satu lockup utama, logo instansi sebagai kredensial pendukung. */
+.login-page{min-height:100vh;display:grid;place-items:center;padding:28px;background:#f4f8f6}
+.login-card{width:min(940px,100%);min-height:520px;display:grid;grid-template-columns:270px minmax(0,1fr);padding:0;overflow:hidden;border:1px solid #d5e7da;border-radius:10px;background:#fff;box-shadow:0 16px 45px #16483e1c}
+.login-identity{display:flex;flex-direction:column;padding:27px 24px 23px;background:#11765f;color:#fff}
+.login-lockup{display:flex;align-items:center;gap:12px;color:#fff;text-decoration:none}
+.login-lockup .brand-mark{flex:none;width:34px;height:34px;gap:3px;padding:6px;border-radius:6px;background:#b8eed1;transform:none}
+.login-lockup .brand-mark i{background:#11765f;border-radius:50%}
+.login-lockup .brand-mark i:nth-child(2),.login-lockup .brand-mark i:nth-child(3){background:#11765f}
+.login-lockup strong,.login-lockup small{display:block}
+.login-lockup strong{font-size:15px;line-height:1.15;letter-spacing:-.3px}
+.login-lockup small{margin-top:2px;font-size:12px;font-weight:600;line-height:1.15}
+.login-tagline{max-width:210px;margin:28px 0 0;color:#fff!important;font-size:14px!important;font-weight:700;line-height:1.7!important}
+.login-supported{margin-top:auto;padding-top:14px;border-top:1px solid #82c6b2}
+.login-supported>span{display:block;color:#e4f7ed;font-size:11px;font-weight:700}
+.login-logos{display:flex;align-items:center;justify-content:flex-start;gap:12px;margin:9px 0 0}
+.login-logos img{width:auto;height:32px;max-width:82px;object-fit:contain}
+.login-logos img+img{padding-left:12px;border-left:1px solid #82c6b2}
+.login-form-panel{padding:36px 40px 40px;align-self:center}
+.login-form-panel h1{margin:0 0 7px;font-size:25px;color:#111}
+.login-form-panel>p{color:#111;font-size:13px}
+.login-form{max-width:440px;gap:14px;margin-top:28px}
+.login-form label{color:#111;font-size:12px}
+.login-form input{border-color:#d9d9d9;border-radius:7px;padding:10px 13px;color:#173b35;font-size:16px}
+.login-submit{margin-top:8px;border-radius:7px;background:#11765f;padding:12px;font-size:14px}
+.login-submit:hover{background:#0d604e}
+.login-error{color:#b94d42!important}
+@media(max-width:650px){
+  .login-page{padding:14px}
+  .login-card{display:block;min-height:0}
+  .login-identity{min-height:270px;padding:24px}
+  .login-tagline{margin-top:22px}
+  .login-supported{margin-top:30px}
+  .login-form-panel{padding:30px 24px 32px}
+}
