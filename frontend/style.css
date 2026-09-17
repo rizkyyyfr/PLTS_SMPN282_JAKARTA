@@ -108,11 +108,13 @@ body { margin:0; min-width:320px; color:var(--ink); background:#f4f8f6; font-fam
 /* Nama instansi ditampilkan dekat logonya dalam dua baris kredensial. */
 .login-logos{display:grid;gap:10px;margin-top:11px}
 .login-logos .institution-credit{display:flex;align-items:center;gap:10px;min-width:0}
-.login-logos .institution-credit img{flex:none;width:auto;height:30px;max-width:42px;object-fit:contain}
+.login-logos .institution-credit img{flex:none;width:38px;height:38px;max-width:38px;object-fit:contain}
+.login-logos .institution-credit img[src*="logo-pnj"]{transform:scale(1.2)}
 .login-logos .institution-credit span{min-width:0;color:#d7f2e1;font-size:9px;line-height:1.3;font-weight:600}
 .sidebar-support-logos{display:grid;gap:9px;margin-top:10px}
 .sidebar-support-logos .institution-credit{display:flex;align-items:center;gap:9px;min-width:0}
-.sidebar-support-logos .institution-credit img{flex:none;width:auto;height:27px;max-width:35px;object-fit:contain}
+.sidebar-support-logos .institution-credit img{flex:none;width:34px;height:34px;max-width:34px;object-fit:contain}
+.sidebar-support-logos .institution-credit img[src*="logo-pnj"]{transform:scale(1.2)}
 .sidebar-support-logos .institution-credit span{min-width:0;color:#b7d0c4;font-size:8px;line-height:1.25;font-weight:600}
 
 /* Dashboard sidebar: lockup aplikasi utama dan logo instansi sebagai dukungan. */
