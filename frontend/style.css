@@ -104,3 +104,18 @@ body { margin:0; min-width:320px; color:var(--ink); background:#f4f8f6; font-fam
 .login-submit:disabled{cursor:wait;opacity:.72;transform:none}
 @media(max-width:760px){.login-card{grid-template-columns:1fr;min-height:0}.login-identity{min-height:285px;padding:30px 28px 25px}.login-identity::after{right:-105px;top:110px}.login-form-panel{padding:38px 30px 42px}.login-form-panel h1{font-size:25px}}
 @media(max-width:420px){.login-page{padding:12px}.login-identity{padding:25px 22px 22px}.login-form-panel{padding:32px 22px 35px}.login-lockup .login-logo{width:36px;height:36px}.login-lockup strong{font-size:15px}.login-tagline{font-size:13px!important}}
+
+/* Dashboard sidebar: lockup aplikasi utama dan logo instansi sebagai dukungan. */
+.dashboard-brand{align-items:center;gap:12px;padding:0 11px 39px}
+.dashboard-brand .dashboard-logo{flex:none;width:40px;height:40px;display:block;object-fit:contain;border-radius:9px}
+.dashboard-brand>span{display:block;min-width:0}
+.dashboard-brand strong,.dashboard-brand small{display:block}
+.dashboard-brand strong{font-size:16px;line-height:1.15;letter-spacing:-.35px}
+.dashboard-brand small{margin-top:3px;font-size:12px;line-height:1.15;font-weight:600;color:#d7f2e1}
+.sidebar-support{padding:15px 9px 0;border-top:1px solid #337161}
+.sidebar-support>span{display:block;color:#b7d0c4;font-size:10px;letter-spacing:.45px;text-transform:uppercase;font-weight:700}
+.sidebar-support-logos{display:flex;align-items:center;gap:11px;margin-top:10px}
+.sidebar-support-logos img{width:auto;height:28px;max-width:75px;object-fit:contain}
+.sidebar-support-logos i{width:1px;height:21px;background:#337161;flex:none}
+.sidebar-footer{margin-top:15px}
+@media(max-width:760px){.dashboard-brand{padding-bottom:30px}.sidebar-support{padding-top:13px}.sidebar-support-logos{margin-top:8px}}
