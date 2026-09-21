@@ -315,6 +315,7 @@ function renderHistory(readings, totals) {
 function updateDashboard(readings, totals, payload = dashboardPayload) {
   if (!readings.length) {
     ['#energyValue', '#powerValue', '#dailyRevenue', '#dailyEnergy', '#meterEnergy', '#temperatureValue', '#voltageValue', '#currentValue', '#totalRevenueAllTime'].forEach((selector) => setText(selector, '—'));
+    setText('#lastUpdated', '—');
     setText('#dashboardDate', payload?.date ? displayDate(payload.date) : '');
     setText('#heroComparison', 'Belum ada data produksi pada tanggal ini.');
     setText('#chartComparison', '');
@@ -354,7 +355,10 @@ function updateDashboard(readings, totals, payload = dashboardPayload) {
   setText('#voltageValue', numberOrDash(latest.voltage, ' V')); setText('#currentValue', numberOrDash(latest.current, ' A'));
   setText('#alertTitle', online && hasTemperature ? (temperature < 65 ? 'Semua sensor normal' : 'Perhatian suhu panel') : 'Periksa koneksi sensor');
   setText('#alertDescription', online && hasTemperature ? (temperature < 65 ? 'Suhu dan pembacaan meter berada pada rentang aman.' : 'Suhu panel melewati batas aman 65°C.') : 'Pembacaan terakhir sudah lebih dari 15 menit atau suhu tidak tersedia.');
-  setText('#lastUpdated', new Intl.DateTimeFormat('id-ID', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(now));
+  // Tampilkan waktu pembacaan sensor terbaru dari Supabase, bukan waktu
+  // browser melakukan refresh. Jika Raspberry Pi berhenti mengirim data,
+  // timestamp ini ikut berhenti sehingga umur data dapat terdeteksi.
+  setText('#lastUpdated', new Intl.DateTimeFormat('id-ID', { day: '2-digit', month: '2-digit', year: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false }).format(new Date(latest.timestamp)));
 }
 
 // =====================================================================
