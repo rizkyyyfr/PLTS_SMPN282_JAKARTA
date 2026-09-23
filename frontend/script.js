@@ -68,14 +68,27 @@ function nearestTemperature(tempRows, targetMs, toleranceMs = 6 * 60 * 1000) {
 }
 
 async function fetchKwhRange(startInclusive, endExclusive) {
-  const { data, error } = await supabaseClient
-    .from('kwh_log')
-    .select('id,timestamp,kwh_v,kwh_i,kwh_p,kwh_eexp')
-    .gte('timestamp', startInclusive)
-    .lt('timestamp', endExclusive)
-    .order('timestamp', { ascending: true });
-  if (error) throw new Error('Gagal mengambil data kwh_log: ' + error.message);
-  return data || [];
+  // Supabase membatasi jumlah baris dalam satu respons (umumnya 1.000).
+  // Rentang bulanan dapat melebihi batas tersebut, jadi ambil semua halaman
+  // agar grafik tidak berhenti di awal bulan dan menganggap sisanya nol.
+  const pageSize = 1000;
+  let from = 0;
+  const all = [];
+  while (true) {
+    const { data, error } = await supabaseClient
+      .from('kwh_log')
+      .select('id,timestamp,kwh_v,kwh_i,kwh_p,kwh_eexp')
+      .gte('timestamp', startInclusive)
+      .lt('timestamp', endExclusive)
+      .order('timestamp', { ascending: true })
+      .range(from, from + pageSize - 1);
+    if (error) throw new Error('Gagal mengambil data kwh_log: ' + error.message);
+    if (!data || !data.length) break;
+    all.push(...data);
+    if (data.length < pageSize) break;
+    from += pageSize;
+  }
+  return all;
 }
 
 async function fetchTempRange(startInclusive, endExclusive) {
@@ -437,7 +450,37 @@ async function exportSheet(start, end) {
 // Event listener (SAMA seperti sebelumnya, kecuali export & logout)
 // =====================================================================
 $('.menu-button').addEventListener('click', () => $('.sidebar').classList.toggle('open'));
-document.querySelectorAll('.nav-item').forEach((link) => link.addEventListener('click', () => $('.sidebar').classList.remove('open')));
+
+// Sinkronkan menu samping dengan bagian halaman yang sedang terlihat.
+// Sebelumnya Dashboard selalu memiliki class `active`, sehingga status menu
+// tidak berubah walaupun pengguna sudah berpindah bagian dengan scroll.
+const navLinks = [...document.querySelectorAll('.nav-item')];
+const navSections = navLinks
+  .map((link) => document.querySelector(link.getAttribute('href')))
+  .filter(Boolean);
+function setActiveNav(sectionId) {
+  navLinks.forEach((link) => {
+    const active = link.getAttribute('href') === `#${sectionId}`;
+    link.classList.toggle('active', active);
+    if (active) link.setAttribute('aria-current', 'page');
+    else link.removeAttribute('aria-current');
+  });
+}
+function updateActiveNav() {
+  const marker = window.scrollY + Math.min(window.innerHeight * 0.3, 220);
+  let current = navSections[0];
+  navSections.forEach((section) => {
+    if (section.getBoundingClientRect().top + window.scrollY <= marker) current = section;
+  });
+  if (current) setActiveNav(current.id);
+}
+navLinks.forEach((link) => link.addEventListener('click', () => {
+  setActiveNav(link.getAttribute('href').slice(1));
+  $('.sidebar').classList.remove('open');
+}));
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+window.addEventListener('resize', updateActiveNav);
+updateActiveNav();
 document.querySelectorAll('.chart-tabs button').forEach((button) => button.addEventListener('click', async () => {
   if (button.classList.contains('active')) return;
   $('.chart-tabs .active').classList.remove('active');
